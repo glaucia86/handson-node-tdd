@@ -9,14 +9,14 @@
 
 process.env.NODE_ENV = 'test';
 
-var mongoose = require('mongoose');
-var Post = require('../api/models/post');
+const mongoose = require('mongoose');
+const Post = require('../api/models/post');
 
-//Pacotes para realização dos testes no Node.Js: Mocha & Chai
-var chai = require('chai');
-var chaiHttp = require('chai-http');
-var server = require('../server');
-var should = chai.should();
+// Pacotes para realização dos testes no Node.Js: Mocha & Chai
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const server = require('../server');
+const should = chai.should();
 
 chai.use(chaiHttp);
 
@@ -38,10 +38,10 @@ describe('Posts', function () {
                 .get('/posts')
                 .end(function (error, res) {
 
-                    //Se a rota estiver e selecionar todos os 'Posts' deverá retornar status: 200 - OK
+                    // Se a rota estiver e selecionar todos os 'Posts' deverá retornar status: 200 - OK
                     res.should.have.status(200);
 
-                    //Apresentando o status OK, devo retornar um array com todos os posts cadastrados no Banco:
+                    // Apresentando o status OK, devo retornar um array com todos os posts cadastrados no Banco:
                     res.body.should.be.a('array');
 
                     done();
