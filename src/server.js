@@ -12,6 +12,8 @@ const app = express();
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+mongoose.Promise = global.Promise;
+
 const port = 8000;
 
 const post = require('./api/routes/post');
@@ -34,7 +36,7 @@ const options = {
 };
 
 //Conexão com a base de dados:
-mongoose.connect(config.DBHost, options);
+mongoose.connect(config.DBHost, { useMongoClient: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Erro ao conectar com a Base de Dados....: '));
 
@@ -50,9 +52,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.text());
-app.use(bodyParser.json({
-    type: 'application/json'
-}));
+app.use(bodyParser.json({ type: 'application/json' }));
 
 app.get("/", (req, res) => res.json({
     message: "Sejam Bem-Vindos a API: Developers BR"
