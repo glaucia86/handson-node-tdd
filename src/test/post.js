@@ -183,5 +183,4 @@ describe('Posts', function () {
             });
         });
     });
-
 });
