@@ -26,10 +26,10 @@ function getAllPosts(req, res) {
 // ==> 2) Método: 'addPost' (acessar em: POST: http://localhost:8000/post)
 function addPost(req, res) {
 
-    //Primeiro eu crio um novo 'Post'
+    // Primeiro eu crio um novo 'Post'
     var newPost = new Post(req.body);
 
-    //Depois salvar as infos concedidas ao usuário na base de dados:
+    // Depois salvar as infos concedidas ao usuário na base de dados:
     newPost.save(function (error, post) {
         if (error) {
             res.send(error);
@@ -51,9 +51,9 @@ function postById(req, res) {
 
 // ==> 4) Método: 'deletePost' (acessar em: DELETE: http://localhost:8000/post/:id)
 function deletePost(req, res) {
-    Post.remove({
-        _id: req.params.id
-    }, function (error, result) {
+    Post.remove({ _id: req.params.id }, function (error, result) {
+        if(error) 
+            res.send(error);
 
         res.json({ message: 'Post excluído com sucesso!', result });
     });
@@ -61,13 +61,11 @@ function deletePost(req, res) {
 
 // ==> 5) Método: 'updatePost' (acessar em: PUT: http://localhost:8000/post/:id)
 function updatePost(req, res) {
-    Post.findById({
-        _id: req.params.id
-    }, function (error, post) {
+    Post.findById({ _id: req.params.id}, function (error, post) {
         if (error)
             res.send(error);
 
-        //Caso não ocorra erros, retornar para o usuário a atualização do 'post'
+        // Caso não ocorra erros, retornar para o usuário a atualização do 'post'
         Object.assign(post, req.body).save(function (error, post) {
             if (error)
                 res.send(error);
@@ -77,11 +75,5 @@ function updatePost(req, res) {
     });
 }
 
-//Finalmente estarei aqui exportando todas as funções criadas:
-module.exports = {
-    getAllPosts,
-    addPost,
-    postById,
-    deletePost,
-    updatePost
-};
+// Finalmente estarei aqui exportando todas as funções criadas:
+module.exports = { getAllPosts, addPost, postById, deletePost, updatePost };
