@@ -55,7 +55,7 @@ app.use(bodyParser.json({
 }));
 
 app.get("/", (req, res) => res.json({
-    message: "Sejam Bem-Vindos a API: Lambda3!"
+    message: "Sejam Bem-Vindos a API: Developers BR"
 }));
 
 // Definição das rotas para: GET (Selecionar Todos)
